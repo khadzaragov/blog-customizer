@@ -32,6 +32,9 @@ export const ArticleParamsForm = ({
 	const asideRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
+		if (!isOpen) {
+			return;
+		}
 		const handleClick = (event: MouseEvent) => {
 			if (
 				asideRef.current &&
@@ -40,10 +43,9 @@ export const ArticleParamsForm = ({
 				setIsOpen(false);
 			}
 		};
-
 		window.addEventListener('mousedown', handleClick);
 		return () => window.removeEventListener('mousedown', handleClick);
-	}, []);
+	}, [isOpen]);
 
 	const handleChange =
 		(key: keyof ArticleStateType) => (option: OptionType) => {
